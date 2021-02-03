@@ -4,7 +4,10 @@ public class DemoApp {
 
 	public static void main(String[] args) {
 		
-
+		PersonManager pm = new PersonManager();
+		for (int i= 0; i < 100; i++){
+			pm.add(createTestPerson());
+		}
 
 	}
 	

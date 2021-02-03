@@ -21,17 +21,34 @@ public class Person {
 		this.age = age;
 		this.country = country;
 		this.salary = salary;
-		this.eyeColor = eyeColor;
 		this.weight = weight;
 		this.size = size;
+
+		if (eyeColor.equals("braun") || eyeColor.equals("blau") || eyeColor.equals("grün"))
+			this.eyeColor = eyeColor;
+		else
+			this.eyeColor = "undefiniert";
+
+		switch(eyeColor){
+			case "braun":
+			case "grün":
+			case "blau":
+				this.eyeColor = eyeColor;
+				break;
+			default:
+				this.eyeColor = "undefiniert";
+		}
 	}
+
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Person person = (Person) o;
-		return gender == person.gender && age == person.age && salary == person.salary && weight == person.weight && size == person.size && Objects.equals(firstname, person.firstname) && Objects.equals(lastname, person.lastname) && Objects.equals(country, person.country) && Objects.equals(eyeColor, person.eyeColor);
+		return gender == person.gender && age == person.age && salary == person.salary
+				&& weight == person.weight && size == person.size && firstname.equals(person.firstname)
+				&& lastname.equals(person.lastname) && Objects.equals(country, person.country) && Objects.equals(eyeColor, person.eyeColor);
 	}
 
 	@Override
