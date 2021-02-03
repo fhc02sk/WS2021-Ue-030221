@@ -26,23 +26,53 @@ public class SocialNetwork {
 	//TODO 1: implementieren Sie hier die rekursive Methode lt. Angabe
 	public ArrayList<User> findAllFriends(User user,
 										  int level, int maxDepth) {
-		// Todo: Abbruchbedingung?
-
-		// sofia
 		ArrayList<User> result = new ArrayList<>();
+		if (level >= maxDepth)
+			return result;	// Abbruchbedingung
+//		if (user.getFriends().size() == 0)
+//			return result;
+
 		result.addAll(user.getFriends());
 
 		for (User friendsOfMine : user.getFriends()) {
 			ArrayList<User> myFriends =
 					findAllFriends(friendsOfMine, level + 1, maxDepth);
-			// Todo: Freunde in Liste aufnehmen
-			// Todo: Check, ob Freund eventuell in Liste ist
+
+			//result.addAll(myFriends);
+
+			for (User friend : myFriends){
+				if (!result.contains(friend))
+					result.add(friend);
+			}
 		}
 
 
 		return result;
 	}
-	
+
+
+	public ArrayList<User> findAllFriends2(User user,
+										  int level, int maxDepth) {
+		ArrayList<User> result = new ArrayList<>();
+		if (level > maxDepth)
+			return result;	// Abbruchbedingung
+		result.add(user);
+
+		for (User friendsOfMine : user.getFriends()) {
+			ArrayList<User> myFriends =
+					findAllFriends2(friendsOfMine, level + 1, maxDepth);
+
+			for (User friend : myFriends){
+				if (!result.contains(friend))
+					result.add(friend);
+			}
+		}
+
+		if (level == 0)
+			result.remove(user);
+
+		return result;
+	}
 	
 	
 	public static SocialNetwork generateDemoNetwork() {
