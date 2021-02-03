@@ -5,10 +5,22 @@ public class DemoApp {
 	public static void main(String[] args) {
 		
 		PersonManager pm = new PersonManager();
-		for (int i= 0; i < 100; i++){
+		for (int i= 0; i < 1000; i++){
 			pm.add(createTestPerson());
 		}
 
+		GenderAnalyzer ga = new GenderAnalyzer();
+		pm.doAnalysis(ga);
+
+		CountryAnalzyer ca = new CountryAnalzyer();
+		pm.doAnalysis(ca);
+		System.out.println(ca.getResult());
+
+		pm.doAnalysis(new MaxSalaryAnalyzer());
+
+		BMIAnalyzer bmiAnalyzer = new BMIAnalyzer();
+		pm.doAnalysis(bmiAnalyzer);
+		System.out.println(bmiAnalyzer.getResult());
 	}
 	
 	
